@@ -1,0 +1,176 @@
+### GIT COMMANDS
+1. ORIGIN URL
+> git config --get remote.origin.url
+> git remote add origin url
+> git remote set-url origin url
+
+
+
+# INIT AND PUSH NEW REPO
+git init
+git add .
+git commit -m "first commit"
+git remote add origin https://github.com/raunak-r/'the-link-here'.git
+git push -u origin master
+
+*******WINDOWS********
+git push --set-upstream origin master
+
+git remote -v //see the repo url
+git branch //see the branches
+git remote add dev_branch https://github.com/raunak-r/learnGit.git
+
+1. CREATE A NEW BRANCH IN GITHUB
+> git checkout -b dev_master //-b says create new branch
+> git status // to check the new files
+> git add . //to add them
+> git commit -m 'added branch' //commit the files with a message
+> git push origin dev_master //to tell which branch to commit to
+
+2. MAKE CHANGE IN ORIGINAL BRANCH
+> git checkout master //change branch
+
+3. MERGE THE TWO BRANCHES
+Let’s go through a simple example of branching and merging with a workflow that you might use in the real world. You’ll follow these steps:
+Do some work on a website.
+Create a branch for a new story you’re working on.
+Do some work in that branch.
+
+At this stage, you’ll receive a call that another issue is critical and you need a hotfix. You’ll do the following:
+Switch to your production branch.
+Create a branch to add the hotfix.
+After it’s tested, merge the hotfix branch, and push to production.
+Switch back to your original story and continue working.
+
+Work in dev branch and do some work in master branch
+> git checkout master //go to master branch
+> git merge devBranch //merge it to master
+> git add .
+> git commit -m 'message'
+> git push -u origin master
+> git branch -d devBranch
+> DELETE BRANCH FROM GITHUB IF YOU WANT
+
+** DELETE A REPO
+> rm -rf .git (UNIX)
+> del .git (FOR WINDOWS)
+
+4. ADD MORE CHANGES TO THE PREVIOUS COMMIT and push in the same previous commit
+> git add .
+> (some_branch) git commit --amend --no-edit 
+> (some_branch) git push -f origin some_branch
+
+RENAME COMMIT MESSAGE
+> git commit --amend
+> git push --force origin <branch> #Other people who've cloned will have to fix their local history
+
+5. REBASE GIT COMMANDS
+> git reflog
+> git log
+> git reset --hard HEAD@{3}
+> git rebase -i SHA^
+then ctrl-x + ctrl-s
+then ctrl-x + ctrl-c
+
+> In case of a failed rebase
+fatal: It seems that there is already a rebase-merge directory, and
+I wonder if you are in the middle of another rebase.  If that is the
+case, please try
+        git rebase (--continue | --abort | --skip)
+If that is not the case, please
+        rm -fr ".git/rebase-merge"
+and run me again.  I am stopping in case you still have something
+valuable there.
+
+
+6. UPDATING .gitignore
+> git rm -r --cached . 
+> git add .
+
+7. REMOVE A FILE FROM COMMITTING
+> git rm --cached <filename>
+
+//create a PULL REQUEST to merge the dev branch with the master branch.
+the request will be first approved then merged
+
+RESOLVING CONFLICTS
+> rm -rf .git/MERGE*
+
+8. WORKING WITH GIT STASHES
+Suppose working on a fix. Stay on the main branch. Work on it. When you're done, a new branch has to be
+created. To create the new branch with updated commits from master, take a pull.
+The pull might say that changes will be lost. 
+Use the below commands to stash, and then take a pull, and reapply the stashed changes.
+The stashed changes can be applied on any branch-anywhere.
+> git stash
+> git stash apply
+> git stash list
+> git stash drop <stash_id>
+
+9. MERGE MULTIPLE PUSHED/NOT_PUSHED COMMITS INTO ONE
+> git rebase -i prev_commit_id_from_where_change_has_to_take_place
+At the interactive screen that opens up, replace pick with squash/fixup at the top for all the commits that you want to squash.
+Save and close the editor through esc --> :wq
+Push to the remote using:
+> git push origin branch_name --force
+
+ALSO, WHEN ONLY ONE COMMIT HAS TO BE MERGED
+> git commit --amend
+> git push origin branch_name --force
+
+10. UPDATING BRANCHES WRT TO MASTER BRANCH WHILE CREATING PR's
+Often what happens is that you'll be working on some_branch. After commiting, this will be merged to master. 
+But what if in the meantime, the master is updated by a lot of changes.
+To update some_branch, and make sure there aren't any conflits, Commit the code first to save it.
+
+> git checkout master
+> git pull origin master
+> git merge some_branch //this will bring in the code changes, but it will not commit the code. 
+//if there are any conflicts, they can be manually resolved.
+> git branch -D some_branch //deleting the branch will make sure that all refs are deleted in some_branch
+> git checkout -b some_branch //this will again bring the new changes, and updated refs, but will not commit.
+> git commit -m "msg"
+> git push origin some_branch --force //the refs are updated globally now. If a PR will be raised now, then conflicts will surely be not there.
+
+
+
+
+# GIT on EC2
+1. INSTALLATION
+yum reinstall git
+OR
+yum remove git
+yum clean all
+yum install git
+
+2. GENERATING SSH KEYS AND ADDING IT TO HOST PC
+> cd ~/.ssh
+> chmod 700 .ssh/
+
+### Either create new keys on Host or add existing keys to Host.
+> ssh-keygen -t rsa -b 4096 -C "emailid"
+### Private key should be kept only on private pc. Copy the private key to home PC.
+OR
+Already I've keys on my Home pc. Copy the public key to the Host PC and it to the
+authorized_keys file. This way I will not be required to create a set of new keys on Host.
+###
+> cat id.pub >> ~/.ssh/authorized_keys
+
+
+To see all the keys.
+> ls -al ~/.ssh
+
+3. CREATING GIT SERVER
+$ cd /srv/git (Create git folder if not there)
+$ mkdir project.git
+$ cd project.git
+$ git init --bare (or -> sudo git init --bare)
+Initialized empty Git repository in /srv/git/project.git/
+### So, far all these are created using sudo commands.
+
+4. ADDING SSH_GPG KEYS - Accessing Private Repositories using just keys (without adding members)
+# start the ssh-agent in the background
+$ eval $(ssh-agent -s)
+> Agent pid xxx
+# Add key to ssh-agent
+$ ssh-add ~/.ssh/id_rsa

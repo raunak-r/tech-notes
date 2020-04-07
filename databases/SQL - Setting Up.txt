@@ -1,0 +1,53 @@
+cd \myProject\mysql\bin:  mysqld --initialize --console
+//A temporary password is generated for root@localhost: xxxxxxxx
+
+
+******STARTING SERVER
+WINDOWS  cd \myProject\mysql\bin: mysqld --console
+UBUNTU   $ sudo service mysql start
+		 $ sudo service mysql stop
+
+******STARTING A CLIENT
+WINDOWS		FIRST OPEN A NEW TERMINAL WINDOW
+			cd \myProject\mysql\bin: mysql -u root -p
+			Enter password:	//enter root's password
+
+UBUNTU		$ mysql -u root -p
+
+******CHANGE PASSWORD FOR ROOT
+mysql> alter user 'root'@'localhost' identified by 'xxxx';
+mysql> quit
+Bye
+
+******RESTART CLIENT AS ROOT
+mysql -u root -p
+Enter password:
+
+mysql>
+
+******CREATE A NEW USER
+First start a client- mysql -u root -p
+
+mysql> create user 'myuser'@'localhost' identified by 'xxxx';
+-- Grant permission to myuser
+mysql> grant all on *.* to 'myuser'@'localhost';
+Query OK (0.01 sec)
+   
+mysql> quit
+
+******CREATE A DATABASE
+mysql -u myuser -p
+mysql> create database if not exists studentdb;
+mysql> show databases;
+mysql> use studentdb;
+
+******DELETE A DATABASE
+mysql -u myuser -p
+drop DATABASE databasename;
+
+******RUNNING A SCRIPT FILE
+--CREATE a NEW FILE called "mycommands.sql"
+mysql> source d:\myProject\mycommands.sql
+
+
+PASSWORD - xxxx

@@ -1,0 +1,3 @@
+# DELETING FILES
+W > RMDIR /Q/S foldername
+L > rm -rf foldername

@@ -1,0 +1,6 @@
+1. java jdk - jdk-8u91-windows-x64
+2. eclipse - eclipse-java-mars-2-win32-x86_64
+3. adt plugin for eclipse - https://dl-ssl.google.com/android/eclipse
+Android Studio
+4. Android SDK - android-sdk_r24.4.1-windows.zip
+5. emulator
