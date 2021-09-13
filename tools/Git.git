@@ -182,3 +182,10 @@ git rebase -i --root
 git commit --amend --author="raunak-r <raunakritesh.india@gmail.com>" --no-edit
 git rebase --continue
 git push origin master --force
+
+
+#### Changing user on local repo from one to another. (Ubuntu)
+To change locally for just one repository, enter in terminal, from within the repository
+> git config credential.username "new_username"
+To change globally use
+> git config --global credential.username "new_username"
