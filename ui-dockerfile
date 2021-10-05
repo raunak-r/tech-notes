@@ -1,0 +1,23 @@
+# sudo docker build -t ui .
+# sudo docker run -d -p 4200:80 ui
+
+### Stage 1: Build the angular application
+FROM node:10-slim as build
+
+RUN npm install -g @angular/cli@6.2.9
+
+# TODO - copy everything except dockerfile here, to reduce build time.
+COPY . ./app
+WORKDIR /app
+
+RUN npm install
+RUN ng build --prod
+
+
+# Stage 2: Serve app with nginx server
+FROM nginx:latest
+
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /app/dist/ /usr/share/nginx/html
+
+EXPOSE 80
