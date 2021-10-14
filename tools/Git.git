@@ -4,8 +4,6 @@
 > git remote add origin url
 > git remote set-url origin url
 
-
-
 # INIT AND PUSH NEW REPO
 git init
 git add .
@@ -81,7 +79,6 @@ If that is not the case, please
         rm -fr ".git/rebase-merge"
 and run me again.  I am stopping in case you still have something
 valuable there.
-
 
 6. UPDATING .gitignore
 > git rm -r --cached . 
@@ -189,3 +186,7 @@ To change locally for just one repository, enter in terminal, from within the re
 > git config credential.username "new_username"
 To change globally use
 > git config --global credential.username "new_username"
+
+## See commands
+git show --stat
+git show
