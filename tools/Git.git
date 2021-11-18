@@ -190,3 +190,10 @@ To change globally use
 ## See commands
 git show --stat
 git show
+
+## Best way to update credentials for a repo, when multiple repositories are running on different credentials.
+> git remote set-url origin https://<USERNAME>:<PASSWORD>@bitbucket.org/path/to/repo.git
+
+To get the url
+> git config --get remote.origin.url
+> git remote get-url origin
