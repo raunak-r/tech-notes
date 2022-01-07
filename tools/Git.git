@@ -197,3 +197,8 @@ git show
 To get the url
 > git config --get remote.origin.url
 > git remote get-url origin
+
+Changing timestamps
+Hint - First rebase everything, and then arrive at the commit you need to update, then use below command.
+> git commit --amend --date="Wed Feb 16 14:00 2011 +0100" --no-edit
+> git commit --amend --date=now --no-edit // to set the current time.
