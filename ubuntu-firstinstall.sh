@@ -83,3 +83,6 @@ python --version
 # putty
 sudo apt-get -y install putty-tools
 
+# redis
+sudo apt -y install redis
+sudo snap install redis-desktop-manager
