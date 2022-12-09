@@ -53,6 +53,7 @@ sudo apt -y install pgadmin4
 # idea
 sudo apt -y update
 sudo apt -y install vim apt-transport-https curl wget software-properties-common
+sudo add-apt-repository ppa:mmk2410/intellij-idea -y
 sudo apt -y install intellij-idea-community -y
 
 # pycharm
