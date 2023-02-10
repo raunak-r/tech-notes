@@ -46,3 +46,18 @@ psql=# grant all privileges on database <dbname> to <username>;
 > .schema tablename //sqlite3
 > \q =to quit
 
+## AWS Helper
+```
+psql \
+   --host=<host> \
+   --port=5432 \
+   --username=postgres \
+   --password \
+   --dbname=postgres 
+
+select schema_name
+from information_schema.schemata;
+
+DROP SCHEMA IF EXISTS public CASCADE; 
+CREATE SCHEMA IF NOT EXISTS public;
+```
