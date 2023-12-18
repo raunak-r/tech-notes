@@ -22,9 +22,7 @@ sudo apt-get install -f -y
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
 source ~/.bashrc 
 nvm install node -y
-nvm install 12
-nvm install 14
-nvm install 16
+nvm install 18
 
 # install git
 sudo apt install git -y
